@@ -1270,8 +1270,19 @@ module ActiveRecord #:nodoc:
       # Set this to true if this is an abstract class (see #abstract_class?).
       attr_accessor :abstract_class
 
-      # Returns whether this class is a base AR class.  If A is a base class and
-      # B descends from A, then B.base_class will return B.
+      # Returns whether this class is a base AR class.
+      #
+      #   class AbstractPerson < ActiveRecord::Base
+      #     self.abstract_class = true
+      #   end
+      #   
+      #   class Person < AbstractPerson
+      #   end
+      #   
+      #   ActiveRecord::Base.abstract_class?  # => false
+      #   AbstractPerson.abstract_class?      # => true
+      #   Person.abstract_class?              # => false
+      #
       def abstract_class?
         defined?(@abstract_class) && @abstract_class == true
       end
